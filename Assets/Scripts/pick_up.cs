@@ -9,6 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Transform PickUpCheck;
     public float checkRadius = 0.5f;
     public LayerMask Gem;
+    public GameObject gem;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +21,13 @@ public class NewBehaviourScript : MonoBehaviour
     {
         PickUpGem();
     }
-    void PickUpGem ()
+    void PickUpGem()
     {
-       if (pickUp = Physics2D.OverlapCircle(PickUpCheck.position, checkRadius, Gem))
+        if (pickUp = Physics2D.OverlapCircle(PickUpCheck.position, checkRadius, Gem))
         {
-            countGem++;
-            Debug.Log(countGem);
-        }
+            GemCounter.Gem++;
+            Destroy(gameObject);
 
+        }
     }
 }
