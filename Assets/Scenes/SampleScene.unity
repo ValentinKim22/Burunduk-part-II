@@ -13451,6 +13451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b8f65ae8b6066489b0fdee1435d0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  ChekAnim: 1
   HeadUp: 0
   HeadCheck: {fileID: 1127033816}
   checkRadius: 0.3
@@ -21672,6 +21674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  ChekAnim: 1
   Damage: 0
   DamageCheck: {fileID: 1664550589}
   checkRadius: 0.7

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TakeDamage : MonoBehaviour
 {
     public Animator anim;
+    public bool ChekAnim = true;
     public bool Damage;
     public Transform DamageCheck;
     public float checkRadius = 0.5f;
@@ -25,7 +26,14 @@ public class TakeDamage : MonoBehaviour
     {
         Damage = Physics2D.OverlapCircle(DamageCheck.position, checkRadius, Enemy);
         anim.SetBool("TakeDamage", Damage);
+        ChekAnim = false;
     }
 
+    void Death()
+    {
+
+        if (ChekAnim == false)
+            Destroy(gameObject);
+    }
 }
 
