@@ -6,6 +6,7 @@ public class Damage : MonoBehaviour
 {
     public Animator anim;
     public bool ChekAnim = true;
+    private int damage = 2;     //  олайдер врага отвечающий за регистрацию урона
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,10 @@ public class Damage : MonoBehaviour
     {
         if (head.gameObject.name == "GroundCheck")
         {
+            Debug.Log(head.gameObject.name);
             anim.SetBool("Death", true);
             gameObject.GetComponent<Collider2D>().enabled = false;
+            transform.GetChild(damage).gameObject.SetActive(false);
             ChekAnim = false;
         }
     }

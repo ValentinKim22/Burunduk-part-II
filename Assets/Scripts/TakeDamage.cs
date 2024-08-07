@@ -21,10 +21,12 @@ public class TakeDamage : MonoBehaviour
     {
         
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Вышел из колайдера");
             isActive = true;
             anim.SetBool("TakeDamage", false);
         }
@@ -34,13 +36,15 @@ public class TakeDamage : MonoBehaviour
         if (isActive == false) return;
         if (collision.gameObject.CompareTag("Enemy") & liveCount > 0)
         {
-            Debug.Log(collision.gameObject.name);
+            
+            Debug.Log("Зашел в колайдер");
             anim.SetBool("TakeDamage", true);
             liveCount--;
             isActive = false;
         }
         if (liveCount == 0)
         {
+            Debug.Log("Смерть");
             anim.SetBool("Death", true);
             ChekAnim = false;
 
@@ -48,7 +52,7 @@ public class TakeDamage : MonoBehaviour
     }
     void Death()
     {
-
+        Debug.Log("Уничтожение обьекта");
         if (ChekAnim == false)
             Destroy(gameObject);
     }
