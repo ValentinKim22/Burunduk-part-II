@@ -6,10 +6,10 @@ public class TakeDamage : MonoBehaviour
 {
     public Animator anim;
     public bool ChekAnim = true;
-    public bool Damage;
-    public Transform DamageCheck;
-    public float checkRadius = 0.5f;
-    public LayerMask Enemy;
+    public bool isActive = true;
+    public int liveCount = 3;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,16 +19,33 @@ public class TakeDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckDamage();
+        
     }
-
-    void CheckDamage()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        Damage = Physics2D.OverlapCircle(DamageCheck.position, checkRadius, Enemy);
-        anim.SetBool("TakeDamage", Damage);
-        ChekAnim = false;
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            isActive = true;
+            anim.SetBool("TakeDamage", false);
+        }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isActive == false) return;
+        if (collision.gameObject.CompareTag("Enemy") & liveCount > 0)
+        {
+            Debug.Log(collision.gameObject.name);
+            anim.SetBool("TakeDamage", true);
+            liveCount--;
+            isActive = false;
+        }
+        if (liveCount == 0)
+        {
+            anim.SetBool("Death", true);
+            ChekAnim = false;
 
+        }
+    }
     void Death()
     {
 

@@ -6,10 +6,6 @@ public class Damage : MonoBehaviour
 {
     public Animator anim;
     public bool ChekAnim = true;
-    public bool HeadUp;
-    public Transform HeadCheck;
-    public float checkRadius = 0.3f;
-    public LayerMask Head;
 
     // Start is called before the first frame update
     void Start()
@@ -20,18 +16,17 @@ public class Damage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DamageEnemy();
+
     }
-    void DamageEnemy()
+    private void OnTriggerEnter2D(Collider2D head)
     {
-        HeadUp = Physics2D.OverlapCircle(HeadCheck.position, checkRadius, Head);
-        if (HeadUp == true)
+        if (head.gameObject.name == "GroundCheck")
         {
-            anim.SetBool("Death", HeadUp);
+            anim.SetBool("Death", true);
             gameObject.GetComponent<Collider2D>().enabled = false;
             ChekAnim = false;
         }
-    }  
+    }
     void Death()
     {
         
