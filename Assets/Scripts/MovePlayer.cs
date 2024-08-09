@@ -9,6 +9,7 @@ public class MovePlayer : MonoBehaviour
     public Vector2 moveVector;
     public float speed = 1.5f;
     public bool faceRight = true;
+    public bool isActive = true;
     public float jumpForce = 7f;
 
 
@@ -52,13 +53,20 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    public bool onGround;
-    public Transform GroundCheck;
-    public float checkRadius = 0.3f;
-    public LayerMask Ground;
-    void CheckingGround ()
+    private void OnTriggerExit2D(Collider2D Ground)
     {
-        onGround = Physics2D.OverlapCircle(GroundCheck.position, checkRadius, Ground);
-        anim.SetBool("onGround", onGround);
+        if (Ground.gameObject.CompareTag("Ground"))
+        {
+            isActive = true;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D Ground)
+    {
+        if (!isActive) return;
+        if (Ground.gameObject.CompareTag("Ground"))
+        {
+            anim.SetBool("onGround", true);
+            isActive = false;
+        }
     }
 }
